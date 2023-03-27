@@ -14,3 +14,22 @@ function changeAiMessage() {
 
 changeAiMessage();
 setInterval(changeAiMessage, 3000);
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetchRandomJokes(5); // Fetches 5 random jokes
+});
+
+function fetchRandomJokes(numJokes) {
+    for (let i = 0; i < numJokes; i++) {
+        fetch("https://api.chucknorris.io/jokes/random")
+            .then((response) => response.json())
+            .then((data) => displayJoke(data.value));
+    }
+}
+
+function displayJoke(joke) {
+    const jokesList = document.getElementById("jokes-list");
+    const listItem = document.createElement("li");
+    listItem.textContent = joke;
+    jokesList.appendChild(listItem);
+}
